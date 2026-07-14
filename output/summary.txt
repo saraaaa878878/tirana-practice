@@ -1,0 +1,14 @@
+TIRANA APARTMENT MARKET - SUMMARY REPORT
+=========================================
+
+Total listings analyzed: 40
+Average price:           116,910 EUR
+Average size:            96.9 sqm
+
+BEST VALUE LISTING
+------------------
+Neighborhood:   Fresku
+Price:          122,178 EUR
+Size:           141 sqm
+Bedrooms:       4
+Price per sqm:  867 EUR/sqm

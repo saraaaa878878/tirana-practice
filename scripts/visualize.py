@@ -35,4 +35,16 @@ plt.ylabel("Price (EUR)")
 plt.tight_layout()
 plt.savefig("output/price_vs_sqm.png")
 plt.close()
-print("Saved 3 charts to output/")
+
+# --- Chart 4: Boxplot of price grouped by bedrooms ---
+plt.figure(figsize=(8, 5))
+groups = [df[df["bedrooms"] == b]["price"] for b in sorted(df["bedrooms"].unique())]
+plt.boxplot(groups, tick_labels=sorted(df["bedrooms"].unique()))
+plt.title("Price Distribution by Number of Bedrooms")
+plt.xlabel("Bedrooms")
+plt.ylabel("Price (EUR)")
+plt.tight_layout()
+plt.savefig("output/price_by_bedrooms_boxplot.png")
+plt.close()
+
+print("Saved 4 charts to output/")

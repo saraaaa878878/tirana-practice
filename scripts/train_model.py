@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import joblib
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, r2_score
@@ -10,6 +11,7 @@ from sklearn.model_selection import train_test_split
 # Build the path from the script's location, so it works
 # no matter which folder you run the script from.
 DATA_PATH = Path(__file__).resolve().parent.parent / "data" / "apartments.csv"
+MODEL_PATH = Path(__file__).resolve().parent.parent / "models" / "price_model.joblib"
 
 FEATURES = ["sqm", "bedrooms", "bathrooms", "floor"]
 TARGET = "price"
@@ -37,7 +39,14 @@ def main():
     model = LinearRegression()
     model.fit(X_train, y_train)
 
-    # 6. Evaluate on the unseen test set
+    # 6. Save the trained model so it can be reused later without retraining.
+    #    mkdir(parents=True, exist_ok=True) creates the models/ folder if it
+    #    doesn't exist yet, and doesn't error if it already does.
+    MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, MODEL_PATH)
+    print(f"Model saved to {MODEL_PATH}")
+
+    # 7. Evaluate on the unseen test set
     y_pred = model.predict(X_test)
     r2 = r2_score(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
